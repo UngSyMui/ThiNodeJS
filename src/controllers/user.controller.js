@@ -16,8 +16,8 @@ exports.createForm =(req,res)=>{
     res.render("user/create");
 }
 exports.save =  async (req,res)=>{
-    let existUser = await User.findOne({email: req.body.email});
-    if(existUser) res.status(422).send("Email is exist");
+    let existUser = await User.findOne({username: req.body.username});
+    if(existUser) res.status(422).send("Username is exist");
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(req.body.password,salt);
     const user = new User({
